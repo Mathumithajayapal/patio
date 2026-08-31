@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | PatioOasis</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        // Earthy outdoor green palette
+                        brand: { primary: '#2F855A', light: '#48BB78', dark: '#22543D' },
+                        footer: { bg: '#0a0a0a', text: '#a0aebb' },
+                        darkBg: '#050505',
+                        darkCard: '#1f2937',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Playfair Display', 'serif'],
+                    },
+                },
+            }
+        }
+    </script>
+
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-nav-menu {
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* FAQ specific animations */
+        .faq-answer {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease-out, opacity 0.3s ease-out;
+            opacity: 0;
+        }
+        
+        .faq-answer.open {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+        
+        .faq-inner {
+            overflow: hidden;
+        }
+    </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
+</head>
+
+<body class="bg-white dark:bg-darkBg text-gray-900 dark:text-gray-100">
+
+    <header class="fixed top-0 left-0 right-0 z-[1000] bg-white/90 dark:bg-darkBg/90 backdrop-blur-md shadow-sm">
+        <nav class="max-w-[1400px] mx-auto px-4 py-1">
+            <div class="flex items-center justify-between min-h-[48px] relative">
+                <a href="index.html"
+                    class="text-2xl font-bold tracking-tighter text-brand-primary flex items-center gap-2 z-10 font-display">
+                    <i class="fas fa-leaf"></i> PatioOasis
+                </a>
+
+                <div class="hidden lg:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
+                    <div class="relative group">
+                        <a href="#"
+                            class="text-base font-medium hover:text-brand-primary transition-all flex items-center gap-1">
+                            Home <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div
+                            class="absolute left-0 mt-2 w-40 bg-white dark:bg-darkCard rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden">
+                            <div class="py-2 flex flex-col">
+                                <a href="index.html"
+                                    class="px-4 py-2 text-base text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-brand-primary transition-colors">Home
+                                    1</a>
+                                <a href="home-2.html"
+                                    class="px-4 py-2 text-base text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-brand-primary transition-colors">Home
+                                    2</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="about.html" class="text-base font-medium hover:text-brand-primary transition-all">About</a>
+                    <a href="menu.html"
+                        class="text-base font-medium hover:text-brand-primary transition-all">Catalog</a>
+                    <a href="services.html"
+                        class="text-base font-medium hover:text-brand-primary transition-all">Services</a>
+                    <a href="gallery.html"
+                        class="text-base font-medium hover:text-brand-primary transition-all">Gallery</a>
+                    <a href="faq.html" class="text-base font-medium text-brand-primary font-bold transition-all">FAQ</a>
+                    <a href="blog.html" class="text-base font-medium hover:text-brand-primary transition-all">Blog</a>
+                    <a href="contact.html"
+                        class="text-base font-medium hover:text-brand-primary transition-all">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-4 z-10">
+                    <div class="hidden lg:flex items-center gap-4 pl-4 border-l border-gray-200 dark:border-gray-700">
+                        <button id="themeToggle"
+                            class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-brand-primary hover:text-white transition-all"><i
+                                class="fas fa-moon text-sm"></i></button>
+                        <button id="rtlToggle"
+                            class="px-2 py-1 text-xs font-bold rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-brand-primary hover:text-white transition-all">RTL</button>
+                        <a href="login.html"
+                            class="px-4 py-2 rounded-full bg-brand-primary text-white text-sm font-semibold hover:bg-brand-dark transition-all">Login</a>
+                    </div>
+                    <button class="lg:hidden text-2xl text-brand-primary" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="mobileNavMenu"
+        class="mobile-nav-menu fixed top-0 -right-[100%] w-[85%] max-w-sm h-full bg-slate-900 z-[1001] p-6 flex flex-col overflow-y-auto">
+        <div class="flex items-center justify-between mb-8">
+            <a href="index.html" class="text-2xl font-bold tracking-tighter text-brand-primary flex items-center gap-2 font-display">
+                <i class="fas fa-leaf"></i> PatioOasis
+            </a>
+            <button class="close-btn text-white text-3xl" id="closeMenuBtn">✕</button>
+        </div>
+        <ul class="flex flex-col gap-5 text-white text-lg font-medium">
+            <li>
+                <div class="flex flex-col gap-3">
+                    <div class="flex justify-between items-center cursor-pointer"
+                        onclick="this.nextElementSibling.classList.toggle('hidden')">
+                        <span>Home</span> <i class="fas fa-chevron-down text-sm"></i>
+                    </div>
+                    <div class="hidden pl-4 border-l-2 border-brand-primary/50 text-gray-300 text-base mt-1">
+                        <a href="index.html" class="block py-1.5 hover:text-white transition-colors">Home 1</a>
+                        <a href="home-2.html" class="block py-1.5 hover:text-white transition-colors">Home 2</a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="menu.html">Catalog</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html" class="text-brand-primary font-bold">FAQ</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="mt-8 pt-8 border-t border-slate-700 flex items-center gap-4">
+            <button id="mobileThemeToggle"
+                class="w-11 h-11 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-brand-primary hover:text-white transition-all"><i
+                    class="fas fa-moon text-base"></i></button>
+            <button id="mobileRtlToggle"
+                class="px-4 py-2.5 text-sm font-bold rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-brand-primary hover:text-white transition-all">RTL</button>
+        </div>
+    </div>
+
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-gray-50 dark:bg-darkBg/50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="reveal">
+                <span class="text-brand-primary font-semibold tracking-widest uppercase text-sm">Customer Support</span>
+                <h1 class="text-5xl lg:text-7xl font-semibold mt-4 mb-6 leading-tight">Frequently Asked <span
+                        class="text-brand-primary">Questions</span></h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-lg">Have questions about shipping,
+                    warranties, or caring for your new outdoor furniture? Find all the answers you need to maintain your
+                    perfect oasis.</p>
+                <div class="flex gap-4">
+                    <a href="contact.html"
+                        class="px-8 py-4 bg-brand-primary text-white rounded-full font-semibold hover:opacity-90 transition">Contact
+                        Support</a>
+                    <a href="#"
+                        class="px-8 py-4 border-2 border-brand-primary text-brand-primary rounded-full font-semibold hover:bg-brand-primary hover:text-white transition">Return
+                        Policy</a>
+                </div>
+            </div>
+            <div class="relative reveal">
+                <img src="images/patio (12).jpg"
+                    class="rounded-3xl shadow-2xl w-full h-[500px] object-cover" alt="Relaxing outdoor patio seating">
+                <div
+                    class="absolute -bottom-8 -left-8 bg-white dark:bg-darkCard p-6 rounded-2xl shadow-xl hidden md:block border border-gray-100 dark:border-gray-700">
+                    <p class="text-brand-primary font-bold text-3xl">24/7</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Expert Assistance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white dark:bg-darkCard relative border-t border-gray-100 dark:border-gray-800">
+        <div class="max-w-4xl mx-auto px-6">
+            
+            <div class="mb-16 reveal">
+                <h2 class="text-3xl font-bold mb-8 font-display text-gray-900 dark:text-white border-b-2 border-brand-primary pb-2 inline-block">Orders & Shipping</h2>
+                
+                <div class="space-y-4">
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-darkBg overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                            <span class="font-semibold text-lg text-gray-800 dark:text-gray-100">How long does standard shipping take?</span>
+                            <i class="fas fa-plus text-brand-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-inner px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <p>Standard shipping typically takes 7-14 business days, depending on your location and the size of your order. Once dispatched, you will receive an email with tracking details so you can monitor your delivery's progress.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-darkBg overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                            <span class="font-semibold text-lg text-gray-800 dark:text-gray-100">Do you offer white-glove delivery?</span>
+                            <i class="fas fa-plus text-brand-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-inner px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <p>Yes, we offer premium white-glove delivery for an additional fee at checkout. This service is included absolutely free for all orders over $2,000. Our team will deliver, unpack, assemble the furniture in your preferred spot, and remove all packaging materials.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-darkBg overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                            <span class="font-semibold text-lg text-gray-800 dark:text-gray-100">Can I track my order once it ships?</span>
+                            <i class="fas fa-plus text-brand-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-inner px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <p>Absolutely. As soon as your order leaves our warehouse, we will send you a confirmation email containing a carrier tracking link. You can also log into your PatioOasis account to view real-time updates.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-darkBg overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                            <span class="font-semibold text-lg text-gray-800 dark:text-gray-100">Do you ship internationally?</span>
+                            <i class="fas fa-plus text-brand-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-inner px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <p>At this time, PatioOasis only ships within the contiguous United States. We do not offer shipping to Hawaii, Alaska, Puerto Rico, or international destinations, but we hope to expand our reach in the future.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-darkBg overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                            <span class="font-semibold text-lg text-gray-800 dark:text-gray-100">What happens if my furniture arrives damaged?</span>
+                            <i class="fas fa-plus text-brand-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-inner px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <p>We take immense care in packaging, but accidents occasionally happen during transit. If your item arrives damaged, please document the damage with photos and contact our support team within 48 hours of delivery. We will arrange for a swift repair or replacement.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-darkBg overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                            <span class="font-semibold text-lg text-gray-800 dark:text-gray-100">Can I change my delivery address after placing an order?</span>
+                            <i class="fas fa-plus text-brand-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-inner px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <p>We process orders quickly to ensure rapid delivery. If you need to change your address, please contact us within 24 hours of placing the order. Address changes requested after the order has shipped may incur rerouting fees.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal delay-100">
+                <h2 class="text-3xl font-bold mb-8 font-display text-gray-900 dark:text-white border-b-2 border-brand-primary pb-2 inline-block">Materials, Care & Warranty</h2>
+                
+                <div class="space-y-4">
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-darkBg overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                            <span class="font-semibold text-lg text-gray-800 dark:text-gray-100">How should I care for my teak furniture?</span>
+                            <i class="fas fa-plus text-brand-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-inner px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <p>Teak is incredibly resilient. To maintain its original golden hue, apply a specialized teak sealer or oil annually. Alternatively, if left untreated, it will gracefully weather to a beautiful silvery-grey patina over time. Clean simply using a soft brush and mild soapy water.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-darkBg overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                            <span class="font-semibold text-lg text-gray-800 dark:text-gray-100">Are your cushions waterproof?</span>
+                            <i class="fas fa-plus text-brand-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-inner px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <p>Our cushions are highly water-resistant, made from premium performance fabrics designed to repel moisture, resist stains, and prevent mildew. However, they are not 100% waterproof. We strongly recommend covering them or bringing them indoors during heavy rainstorms to prolong their life.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-darkBg overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                            <span class="font-semibold text-lg text-gray-800 dark:text-gray-100">What does your 10-year warranty cover?</span>
+                            <i class="fas fa-plus text-brand-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-inner px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <p>Our industry-leading 10-year warranty covers the structural integrity of frames and any manufacturing defects under normal residential use. It protects against unnatural fading, snapping, and severe weather degradation. Normal wear and tear or misuse is excluded.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-darkBg overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                            <span class="font-semibold text-lg text-gray-800 dark:text-gray-100">Can I leave the furniture outside during winter?</span>
+                            <i class="fas fa-plus text-brand-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-inner px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <p>Yes, all of our furniture is engineered to withstand freezing temperatures and snow. However, to keep it looking pristine and reduce spring cleaning time, we highly recommend using our custom-fit, breathable furniture covers during extreme winter months.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-darkBg overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                            <span class="font-semibold text-lg text-gray-800 dark:text-gray-100">How do I clean the aluminum frames?</span>
+                            <i class="fas fa-plus text-brand-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-inner px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <p>Our powder-coated aluminum frames are practically maintenance-free. Simply wipe them down periodically with a soft, damp cloth and a mild detergent. Avoid using abrasive sponges, harsh chemicals, or pressure washers, as these can damage the protective finish.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-darkBg overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                            <span class="font-semibold text-lg text-gray-800 dark:text-gray-100">Do you sell replacement cushions?</span>
+                            <i class="fas fa-plus text-brand-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-inner px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <p>Yes! If you want to refresh the look of your patio or replace an older set, we sell replacement cushions designed to perfectly fit all our standard furniture lines. They are available in over 20 different colors and patterns via our accessories catalog.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <footer class="bg-[#050505] text-gray-400 py-20 border-t border-gray-900">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+                <div class="lg:col-span-4">
+                    <a href="index.html"
+                        class="text-2xl font-bold tracking-tighter text-brand-primary flex items-center gap-2 mb-6 font-display">
+                        <i class="fas fa-leaf"></i> PatioOasis
+                    </a>
+                    <p class="text-sm leading-relaxed mb-8 max-w-sm">
+                        Transforming backyards into breathtaking living spaces. We bring comfort, endurance, and elegant
+                        design to your great outdoors.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300">
+                            <i class="fa-brands fa-pinterest-p"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 lg:col-start-6">
+                    <h4 class="text-white font-display font-medium text-lg mb-6 tracking-wide">Explore</h4>
+                    <ul class="space-y-4 text-sm font-medium">
+                        <li><a href="about.html" class="hover:text-brand-primary transition-colors">Our Story</a></li>
+                        <li><a href="menu.html" class="hover:text-brand-primary transition-colors">Collections</a></li>
+                        <li><a href="services.html" class="hover:text-brand-primary transition-colors">Design
+                                Services</a></li>
+                        <li><a href="gallery.html" class="hover:text-brand-primary transition-colors">Inspiration</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-2">
+                    <h4 class="text-white font-display font-medium text-lg mb-6 tracking-wide">Support</h4>
+                    <ul class="space-y-4 text-sm font-medium">
+                        <li><a href="contact.html" class="hover:text-brand-primary transition-colors">Contact Us</a>
+                        </li>
+                        <li><a href="faq.html" class="hover:text-brand-primary transition-colors">FAQ & Shipping</a>
+                        </li>
+                        <li><a href="#" class="hover:text-brand-primary transition-colors">Warranty Info</a></li>
+                        <li><a href="#" class="hover:text-brand-primary transition-colors">Care Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h4 class="text-white font-display font-medium text-lg mb-6 tracking-wide">Newsletter</h4>
+                    <p class="text-sm mb-4">Subscribe for seasonal patio trends and exclusive early access to sales.</p>
+                    <form class="flex flex-col gap-3">
+                        <input type="email" placeholder="Enter your email"
+                            class="w-full bg-gray-900 border border-gray-800 text-white px-4 py-3 rounded-lg focus:outline-none focus:border-brand-primary transition-colors text-sm"
+                            required>
+                        <button type="button"
+                            class="w-full bg-brand-primary text-white font-semibold py-3 rounded-lg hover:bg-brand-dark transition-colors text-sm">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-gray-900 text-xs">
+                <p>© 2026 PatioOasis. All rights reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <p class="flex items-center gap-2"><i class="fas fa-envelope text-brand-primary"></i>
+                        support@patiooasis.com</p>
+                    <p class="flex items-center gap-2"><i class="fas fa-phone-alt text-brand-primary"></i> +1 (555)
+                        987-6543</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme & RTL Toggles
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+        function toggleTheme() { document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
+        themeToggle.addEventListener('click', toggleTheme); mobileThemeToggle.addEventListener('click', toggleTheme);
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+
+        const rtlToggle = document.getElementById('rtlToggle');
+        const mobileRtlToggle = document.getElementById('mobileRtlToggle');
+        const mobileNav = document.getElementById('mobileNavMenu');
+        function toggleRTL() { document.documentElement.dir = document.documentElement.dir === 'rtl' ? 'ltr' : 'rtl'; localStorage.setItem('dir', document.documentElement.dir); }
+        rtlToggle.addEventListener('click', toggleRTL); mobileRtlToggle.addEventListener('click', toggleRTL);
+        if (localStorage.getItem('dir') === 'rtl') document.documentElement.dir = 'rtl';
+
+        // Hamburger Menu Logic
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const closeBtn = document.getElementById('closeMenuBtn');
+        mobileBtn.addEventListener('click', () => { const isRTL = document.documentElement.dir === 'rtl'; mobileNav.style.right = isRTL ? 'auto' : '0'; mobileNav.style.left = isRTL ? '0' : 'auto'; });
+        closeBtn.addEventListener('click', () => { const isRTL = document.documentElement.dir === 'rtl'; mobileNav.style.right = isRTL ? 'auto' : '-100%'; mobileNav.style.left = isRTL ? '-100%' : 'auto'; });
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                // Toggle open class for grid animation
+                answer.classList.toggle('open');
+                
+                // Rotate icon
+                if (answer.classList.contains('open')) {
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus', 'rotate-180');
+                } else {
+                    icon.classList.add('fa-plus');
+                    icon.classList.remove('fa-minus', 'rotate-180');
+                }
+            });
+        });
+    </script>
+    <script>
+        // Active Link Highlighting
+        document.addEventListener("DOMContentLoaded", () => {
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+            document.querySelectorAll('a').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && currentPath === href) {
+                    if ((link.closest('.lg\\:flex') || link.closest('.desktop-menu') || link.closest('ul') || link.closest('.mobile-nav-drawer')) && !link.closest('.logo')) {
+                        link.classList.add('text-brand-primary', 'font-bold');
+                        link.style.color = 'var(--brand-primary)';
+                        link.style.fontWeight = 'bold';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

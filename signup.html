@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sign Up · PatioOasis</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ===== ROOT VARIABLES (PatioOasis Branding) ===== */
+    :root {
+      --brand-primary: #2F855A; /* Earthy green */
+      --brand-secondary: #22543D; /* Dark green accent */
+      --brand-light: #48BB78;
+      --brand-dark: #22543D;
+      --dark-bg: #050505;
+      --dark-card: #1f2937;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+      --error-color: #ef4444;
+    }
+
+    /* ===== RESET & BASE ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      transition: background-color 0.3s, color 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      position: relative;
+      /* PatioOasis unique background */
+      background-image: radial-gradient(#2F855A 0.5px, transparent 0.5px), radial-gradient(#2F855A 0.5px, #f3f4f6 0.5px);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+      background-attachment: fixed;
+      background-color: #f3f4f6;
+    }
+    body.dark {
+      background-color: var(--dark-bg);
+      background-image: radial-gradient(#1f2937 0.5px, transparent 0.5px), radial-gradient(#1f2937 0.5px, var(--dark-bg) 0.5px);
+      color: var(--brand-light);
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ===== GLOBAL TOGGLES (top-right) ===== */
+    .global-toggles {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      display: flex;
+      gap: 10px;
+      z-index: 999;
+    }
+    [dir="rtl"] .global-toggles {
+      right: auto;
+      left: 18px;
+    }
+    .global-toggles button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid #d1d5db;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand-primary);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .dark .global-toggles button {
+      background: var(--dark-card);
+      border-color: #374151;
+      color: var(--brand-light);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .global-toggles button:hover {
+      background: var(--brand-primary);
+      color: #fff;
+      border-color: var(--brand-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(47, 133, 90, 0.3);
+    }
+    .global-toggles .rtl-btn {
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.3px;
+    }
+
+    /* ===== SIGNUP CARD ===== */
+    .signup-card {
+      max-width: 400px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 28px;
+      padding: 28px 28px 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255,255,255,0.5);
+      transition: background 0.3s, border-color 0.3s;
+      text-align: center;
+      max-height: 98vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .dark .signup-card {
+      background: rgba(31, 41, 55, 0.95);
+      border-color: #374151;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ===== NATIVE RTL FIXES ===== */
+    [dir="rtl"] .form-group {
+      text-align: right;
+    }
+    [dir="rtl"] .form-group label {
+      text-align: right;
+    }
+    [dir="rtl"] .input-wrap input {
+      text-align: right;
+    }
+
+    /* ===== LOGO (100% Match to template) ===== */
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--brand-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2px;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: -0.5px;
+    }
+    .dark .logo { color: var(--brand-light);   font-family: 'Playfair Display', serif;
+}
+    .logo i {
+      color: var(--brand-secondary);
+    }
+    .dark .logo i { color: var(--brand-light); }
+
+    .signup-card h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0px;
+      font-family: 'Playfair Display', serif;
+      margin-top: 0px;
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+    
+    .signup-card .sub {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+    }
+
+    /* ===== COMPACT FORM (Exact sizes maintained) ===== */
+    .form-group {
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.75rem;
+      margin-bottom: 3px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+    .form-group .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: #f9fafb;
+      border-radius: 60px;
+      padding: 0 14px;
+      transition: 0.2s;
+      border: 1px solid #d1d5db;
+      gap: 8px;
+    }
+    .dark .form-group .input-wrap {
+      background: #111827;
+      border-color: #4b5563;
+    }
+    .form-group .input-wrap:focus-within {
+      border-color: var(--brand-primary);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(47, 133, 90, 0.1);
+    }
+    .dark .form-group .input-wrap:focus-within {
+      background: var(--dark-card);
+      border-color: var(--brand-primary);
+    }
+    .form-group .input-wrap i {
+      color: var(--brand-primary);
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    .form-group .input-wrap input {
+      width: 100%;
+      padding: 10px 0;
+      border: none;
+      background: transparent;
+      font-size: 0.85rem;
+      outline: none;
+      color: #1f2937;
+    }
+    .dark .form-group .input-wrap input { color: #f9fafb; }
+    .form-group .input-wrap input::placeholder { color: #9ca3af; font-size: 0.8rem; }
+
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 6px 0 12px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+    .form-options a {
+      color: var(--brand-primary);
+      font-weight: 600;
+    }
+    .form-options a:hover { 
+        text-decoration: underline; 
+        color: var(--brand-dark);
+    }
+    .dark .form-options a:hover { color: var(--brand-light); }
+    
+    .checkbox-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+    }
+    .checkbox-wrap input[type="checkbox"] {
+      accent-color: var(--brand-primary);
+      width: 15px;
+      height: 15px;
+      margin: 0;
+      border-radius: 4px;
+    }
+
+    .signup-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--brand-primary);
+      border: none;
+      border-radius: 60px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px -1px rgba(47, 133, 90, 0.2);
+    }
+    .signup-btn:hover {
+      background: var(--brand-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(47, 133, 90, 0.3);
+    }
+
+    .signup-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 12px 0 12px;
+      color: var(--text-secondary);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .signup-divider hr {
+      flex: 1;
+      border: none;
+      border-top: 1px solid #e5e7eb;
+    }
+    .dark .signup-divider hr { border-top-color: #374151; }
+
+    /* ===== MATCHED SOCIAL LOGIN STYLES ===== */
+    .social-login {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    
+    .social-btn {
+      flex: 1;
+      background: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 60px;
+      padding: 0;
+      height: 48px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+    .dark .social-btn {
+      background: var(--dark-bg);
+      border-color: #4b5563;
+      color: #f9fafb;
+    }
+    .social-btn:hover {
+      border-color: var(--brand-primary);
+      background: #f9fafb;
+      transform: translateY(-1px);
+    }
+    .dark .social-btn:hover { background: #1f2937; }
+    .social-btn i { font-size: 1.1rem; }
+    .social-btn.google i { color: #EA4335; }
+    .social-btn.apple i { color: #000; }
+    body.dark .social-btn.apple i { color: #fff; }
+
+    /* Fixed Layout for text flow in RTL */
+    .signin-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      padding-top: 12px;
+    }
+    .signin-link a {
+      color: var(--brand-primary);
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+    .signin-link a:hover { 
+        text-decoration: underline; 
+        color: var(--brand-dark);
+    }
+    .dark .signin-link a:hover { color: var(--brand-light); }
+
+    .signup-card form {
+      flex: 0 0 auto;
+    }
+  </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
+</head>
+<body>
+
+<!-- ===== GLOBAL TOGGLES ===== -->
+<div class="global-toggles">
+  <button id="themeToggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+  <button id="rtlToggle" class="rtl-btn" aria-label="Toggle RTL"><span id="rtlBtnText">RTL</span></button>
+</div>
+
+<!-- ===== SIGN UP CARD ===== -->
+<div class="signup-card">
+
+  <a href="index.html" class="logo font-display"><i class="fas fa-leaf"></i> PatioOasis</a>
+  <h2>Create Account</h2>
+  <p class="sub">Join PatioOasis and elevate your outdoor living.</p>
+
+  <form id="signupForm" action="#" method="POST">
+    <!-- Input 1: Full Name -->
+    <div class="form-group">
+      <label for="fullname">Full name</label>
+      <div class="input-wrap">
+        <i class="fas fa-user"></i>
+        <input type="text" id="fullname" placeholder="Eleanor Rigby" required>
+      </div>
+    </div>
+
+    <!-- Input 2: Email -->
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <div class="input-wrap">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="email" placeholder="eleanor@example.com" required>
+      </div>
+    </div>
+
+    <!-- Input 3: Password -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <div class="input-wrap">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="password" placeholder="min 8 characters" required>
+      </div>
+    </div>
+
+    <!-- Input 4: Confirm Password -->
+    <div class="form-group">
+      <label for="confirm-password">Confirm password</label>
+      <div class="input-wrap">
+        <i class="fas fa-check-circle"></i>
+        <input type="password" id="confirm-password" placeholder="re-enter password" required>
+      </div>
+    </div>
+
+    <!-- Checkbox Row -->
+    <div class="form-options">
+      <label class="checkbox-wrap">
+        <input type="checkbox" checked> 
+        <span dir="auto">I agree to <a href="#">Terms</a> &amp; <a href="#">Privacy</a></span>
+      </label>
+    </div>
+
+    <button type="submit" class="signup-btn" id="signupBtn">Create Account</button>
+  </form>
+
+  <div class="signup-divider">
+    <hr> <span dir="auto">or sign up with</span> <hr>
+  </div>
+
+  <!-- Social Login Row -->
+  <div class="social-login">
+    <button type="button" class="social-btn google" id="googleLogin">
+      <i class="fab fa-google"></i> <span>Google</span>
+    </button>
+    <button type="button" class="social-btn apple" id="appleLogin">
+      <i class="fab fa-apple"></i> <span>Apple</span>
+    </button>
+  </div>
+
+  <div class="signin-link">
+    <span dir="auto">Already have an account?</span> <a href="login.html">Sign in</a>
+  </div>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+  // ----- THEME TOGGLE -----
+  const toggleTheme = () => {
+    document.body.classList.toggle('dark');
+    const icon = document.querySelector('#themeToggle i');
+    if (document.body.classList.contains('dark')) {
+      icon.className = 'fas fa-sun';
+    } else {
+      icon.className = 'fas fa-moon';
+    }
+  };
+  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+  // ----- RTL TOGGLE -----
+  const toggleRTL = () => {
+    const html = document.documentElement;
+    const currentDir = html.getAttribute('dir');
+    const newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+    html.setAttribute('dir', newDir);
+    
+    // Update button text
+    const rtlBtn = document.getElementById('rtlBtnText');
+    if (newDir === 'rtl') {
+      rtlBtn.innerHTML = 'LTR';
+    } else {
+      rtlBtn.innerHTML = 'RTL';
+    }
+  };
+  document.getElementById('rtlToggle').addEventListener('click', toggleRTL);
+
+  // ----- SIGNUP FORM LOGIC -----
+  const signupBtn = document.getElementById('signupBtn');
+  
+  document.getElementById('signupForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const fullname = document.getElementById('fullname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const confirm = document.getElementById('confirm-password').value.trim();
+
+    if (!fullname || !email || !password || !confirm) {
+      alert('Please fill in all fields.');
+      return;
+    }
+    if (password.length < 8) {
+      alert('Password must be at least 8 characters.');
+      return;
+    }
+    if (password !== confirm) {
+      alert('Passwords do not match.');
+      return;
+    }
+
+    // Mock Signup Loading State
+    const originalHTML = signupBtn.innerHTML;
+    signupBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Creating...';
+    signupBtn.style.pointerEvents = 'none';
+
+    setTimeout(() => {
+      signupBtn.innerHTML = originalHTML;
+      signupBtn.style.pointerEvents = 'auto';
+      // Redirect to index page for project navigation
+      window.location.href = 'index.html'; 
+    }, 1000);
+  });
+</script>
+
+</body>
+</html>

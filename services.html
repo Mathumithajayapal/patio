@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | PatioOasis</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        // Earthy outdoor green palette
+                        brand: { primary: '#2F855A', light: '#48BB78', dark: '#22543D' },
+                        footer: { bg: '#0a0a0a', text: '#a0aebb' },
+                        darkBg: '#050505',
+                        darkCard: '#1f2937',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Playfair Display', 'serif'],
+                    },
+                },
+            }
+        }
+    </script>
+
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-nav-menu {
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Custom card style for unique overlap effect */
+        .service-card-content {
+            border-radius: 2rem 2rem 0 0;
+            margin-top: -2rem;
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
+</head>
+
+<body class="bg-white dark:bg-darkBg text-gray-900 dark:text-gray-100">
+
+    <header class="fixed top-0 left-0 right-0 z-[1000] bg-white/90 dark:bg-darkBg/90 backdrop-blur-md shadow-sm">
+        <nav class="max-w-[1400px] mx-auto px-4 py-1">
+            <div class="flex items-center justify-between min-h-[48px] relative">
+                <a href="index.html"
+                    class="text-2xl font-bold tracking-tighter text-brand-primary flex items-center gap-2 z-10 font-display">
+                    <i class="fas fa-leaf"></i> PatioOasis
+                </a>
+
+                <div class="hidden lg:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
+                    <div class="relative group">
+                        <a href="#"
+                            class="text-base font-medium hover:text-brand-primary transition-all flex items-center gap-1">
+                            Home <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div
+                            class="absolute left-0 mt-2 w-40 bg-white dark:bg-darkCard rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden">
+                            <div class="py-2 flex flex-col">
+                                <a href="index.html"
+                                    class="px-4 py-2 text-base text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-brand-primary transition-colors">Home
+                                    1</a>
+                                <a href="home-2.html"
+                                    class="px-4 py-2 text-base text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-brand-primary transition-colors">Home
+                                    2</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="about.html" class="text-base font-medium hover:text-brand-primary transition-all">About</a>
+                    <a href="menu.html"
+                        class="text-base font-medium hover:text-brand-primary transition-all">Catalog</a>
+                    <a href="services.html"
+                        class="text-base font-medium hover:text-brand-primary transition-all font-bold"
+                        style="color: var(--brand-primary);">Services</a>
+                    <a href="gallery.html"
+                        class="text-base font-medium hover:text-brand-primary transition-all">Gallery</a>
+                    <a href="faq.html" class="text-base font-medium hover:text-brand-primary transition-all">FAQ</a>
+                    <a href="blog.html" class="text-base font-medium hover:text-brand-primary transition-all">Blog</a>
+                    <a href="contact.html"
+                        class="text-base font-medium hover:text-brand-primary transition-all">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-4 z-10">
+                    <div class="hidden lg:flex items-center gap-4 pl-4 border-l border-gray-200 dark:border-gray-700">
+                        <button id="themeToggle"
+                            class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-brand-primary hover:text-white transition-all"><i
+                                class="fas fa-moon text-sm"></i></button>
+                        <button id="rtlToggle"
+                            class="px-2 py-1 text-xs font-bold rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-brand-primary hover:text-white transition-all">RTL</button>
+                        <a href="login.html"
+                            class="px-4 py-2 rounded-full bg-brand-primary text-white text-sm font-semibold hover:bg-brand-dark transition-all">Login</a>
+                    </div>
+                    <button class="lg:hidden text-2xl text-brand-primary" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="mobileNavMenu"
+        class="mobile-nav-menu fixed top-0 -right-[100%] w-[85%] max-w-sm h-full bg-slate-900 z-[1001] p-6 flex flex-col overflow-y-auto">
+        <div class="flex items-center justify-between mb-8">
+            <a href="index.html" class="text-2xl font-bold tracking-tighter text-brand-primary flex items-center gap-2 font-display">
+                <i class="fas fa-leaf"></i> PatioOasis
+            </a>
+            <button class="close-btn text-white text-3xl" id="closeMenuBtn">✕</button>
+        </div>
+        <ul class="flex flex-col gap-5 text-white text-lg font-medium">
+            <li>
+                <div class="flex flex-col gap-3">
+                    <div class="flex justify-between items-center cursor-pointer"
+                        onclick="this.nextElementSibling.classList.toggle('hidden')">
+                        <span>Home</span> <i class="fas fa-chevron-down text-sm"></i>
+                    </div>
+                    <div class="hidden pl-4 border-l-2 border-brand-primary/50 text-gray-300 text-base mt-1">
+                        <a href="index.html" class="block py-1.5 hover:text-white transition-colors">Home 1</a>
+                        <a href="home-2.html" class="block py-1.5 hover:text-white transition-colors">Home 2</a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="menu.html">Catalog</a></li>
+            <li><a href="services.html" class="text-brand-primary font-bold">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="mt-8 pt-8 border-t border-slate-700 flex items-center gap-4">
+            <button id="mobileThemeToggle"
+                class="w-11 h-11 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-brand-primary hover:text-white transition-all"><i
+                    class="fas fa-moon text-base"></i></button>
+            <button id="mobileRtlToggle"
+                class="px-4 py-2.5 text-sm font-bold rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-brand-primary hover:text-white transition-all">RTL</button>
+        </div>
+    </div>
+
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-gray-50 dark:bg-darkBg/50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="reveal">
+                <span class="text-brand-primary font-semibold tracking-widest uppercase text-sm">Our Services</span>
+                <h1 class="text-5xl lg:text-7xl font-semibold mt-4 mb-6 leading-tight">Expert Outdoor <span
+                        class="text-brand-primary">Design & Delivery</span></h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-lg">From complimentary space planning and
+                    custom 3D renderings to premium white-glove delivery, our dedicated team is here to bring your
+                    backyard vision to life effortlessly.</p>
+                <div class="flex gap-4">
+                    <a href="contact.html"
+                        class="px-8 py-4 bg-brand-primary text-white rounded-full font-semibold hover:opacity-90 transition shadow-lg shadow-brand-primary/30">Book
+                        Consultation</a>
+                    <a href="menu.html"
+                        class="px-8 py-4 border-2 border-brand-primary text-brand-primary rounded-full font-semibold hover:bg-brand-primary hover:text-white transition">View
+                        Catalog</a>
+                </div>
+            </div>
+            <div class="relative reveal delay-100">
+                <img src="images/patio (4).jpg"
+                    class="rounded-3xl shadow-2xl w-full h-[500px] object-cover"
+                    alt="Outdoor patio design consultation">
+                <div
+                    class="absolute -bottom-8 -left-8 bg-white dark:bg-darkCard p-6 rounded-2xl shadow-xl hidden md:block border border-gray-100 dark:border-gray-700">
+                    <p class="text-brand-primary font-bold text-3xl">5-Star</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">White-Glove Service</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white dark:bg-darkCard">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-primary font-bold uppercase tracking-wider text-sm">Tailored Experiences</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-2 font-display">How We Can Help</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+
+                <div
+                    class="group flex flex-col h-full bg-gray-50 dark:bg-darkBg rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 transition-all duration-300 reveal">
+                    <div class="h-60 overflow-hidden relative">
+                        <img src="images/patio (5).jpg"
+                            alt="3D Planning"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-brand-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay">
+                        </div>
+                    </div>
+                    <div class="service-card-content flex flex-col flex-grow p-8 bg-gray-50 dark:bg-darkBg">
+                        <div
+                            class="w-12 h-12 rounded-full bg-white dark:bg-darkCard shadow-sm flex items-center justify-center text-brand-primary text-xl mb-6 -mt-14 z-20 border border-gray-100 dark:border-gray-700 relative">
+                            <i class="fas fa-pencil-ruler"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 font-display">3D Space Planning</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-8 flex-grow">Visualize your dream patio
+                            before making a purchase. Our designers create scaled 3D renderings customized to your
+                            specific backyard dimensions.</p>
+                        <div class="mt-auto border-t border-gray-200 dark:border-gray-700 pt-5">
+                            <a href="services-details.html" class="flex items-center justify-between group/btn w-full">
+                                <span
+                                    class="font-bold text-gray-900 dark:text-white group-hover/btn:text-brand-primary transition-colors">Enquire
+                                    Now</span>
+                                <span
+                                    class="w-10 h-10 rounded-full bg-white dark:bg-darkCard border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 group-hover/btn:bg-brand-primary group-hover/btn:border-brand-primary group-hover/btn:text-white transition-all transform group-hover/btn:translate-x-1">
+                                    <i class="fas fa-arrow-right text-sm"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group flex flex-col h-full bg-gray-50 dark:bg-darkBg rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 transition-all duration-300 reveal delay-100">
+                    <div class="h-60 overflow-hidden relative">
+                        <img src="images/patio (6).jpg"
+                            alt="White Glove Delivery"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-brand-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay">
+                        </div>
+                    </div>
+                    <div class="service-card-content flex flex-col flex-grow p-8 bg-gray-50 dark:bg-darkBg">
+                        <div
+                            class="w-12 h-12 rounded-full bg-white dark:bg-darkCard shadow-sm flex items-center justify-center text-brand-primary text-xl mb-6 -mt-14 z-20 border border-gray-100 dark:border-gray-700 relative">
+                            <i class="fas fa-truck-loading"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 font-display">White-Glove Delivery</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-8 flex-grow">We do the heavy lifting. Our
+                            team delivers, unpacks, fully assembles your furniture precisely where you want it, and
+                            removes all packaging debris.</p>
+                        <div class="mt-auto border-t border-gray-200 dark:border-gray-700 pt-5">
+                            <a href="services-details.html" class="flex items-center justify-between group/btn w-full">
+                                <span
+                                    class="font-bold text-gray-900 dark:text-white group-hover/btn:text-brand-primary transition-colors">Enquire
+                                    Now</span>
+                                <span
+                                    class="w-10 h-10 rounded-full bg-white dark:bg-darkCard border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 group-hover/btn:bg-brand-primary group-hover/btn:border-brand-primary group-hover/btn:text-white transition-all transform group-hover/btn:translate-x-1">
+                                    <i class="fas fa-arrow-right text-sm"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group flex flex-col h-full bg-gray-50 dark:bg-darkBg rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 transition-all duration-300 reveal delay-200">
+                    <div class="h-60 overflow-hidden relative">
+                        <img src="images/patio (7).jpg"
+                            alt="Custom Upholstery"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-brand-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay">
+                        </div>
+                    </div>
+                    <div class="service-card-content flex flex-col flex-grow p-8 bg-gray-50 dark:bg-darkBg">
+                        <div
+                            class="w-12 h-12 rounded-full bg-white dark:bg-darkCard shadow-sm flex items-center justify-center text-brand-primary text-xl mb-6 -mt-14 z-20 border border-gray-100 dark:border-gray-700 relative">
+                            <i class="fas fa-swatchbook"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 font-display">Custom Upholstery</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-8 flex-grow">Choose from over 100+
+                            weather-resistant fabrics. Tailor your cushions and pillows to match your home's unique
+                            exterior color palette perfectly.</p>
+                        <div class="mt-auto border-t border-gray-200 dark:border-gray-700 pt-5">
+                            <a href="services-details.html" class="flex items-center justify-between group/btn w-full">
+                                <span
+                                    class="font-bold text-gray-900 dark:text-white group-hover/btn:text-brand-primary transition-colors">Enquire
+                                    Now</span>
+                                <span
+                                    class="w-10 h-10 rounded-full bg-white dark:bg-darkCard border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 group-hover/btn:bg-brand-primary group-hover/btn:border-brand-primary group-hover/btn:text-white transition-all transform group-hover/btn:translate-x-1">
+                                    <i class="fas fa-arrow-right text-sm"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group flex flex-col h-full bg-gray-50 dark:bg-darkBg rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 transition-all duration-300 reveal">
+                    <div class="h-60 overflow-hidden relative">
+                        <img src="images/patio (8).jpg"
+                            alt="Seasonal Maintenance"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-brand-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay">
+                        </div>
+                    </div>
+                    <div class="service-card-content flex flex-col flex-grow p-8 bg-gray-50 dark:bg-darkBg">
+                        <div
+                            class="w-12 h-12 rounded-full bg-white dark:bg-darkCard shadow-sm flex items-center justify-center text-brand-primary text-xl mb-6 -mt-14 z-20 border border-gray-100 dark:border-gray-700 relative">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 font-display">Seasonal Maintenance</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-8 flex-grow">Protect your investment. We
+                            offer bi-annual deep cleaning, wood oiling, and weather-proofing services to keep your
+                            pieces looking brand new year-round.</p>
+                        <div class="mt-auto border-t border-gray-200 dark:border-gray-700 pt-5">
+                            <a href="services-details.html" class="flex items-center justify-between group/btn w-full">
+                                <span
+                                    class="font-bold text-gray-900 dark:text-white group-hover/btn:text-brand-primary transition-colors">Enquire
+                                    Now</span>
+                                <span
+                                    class="w-10 h-10 rounded-full bg-white dark:bg-darkCard border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 group-hover/btn:bg-brand-primary group-hover/btn:border-brand-primary group-hover/btn:text-white transition-all transform group-hover/btn:translate-x-1">
+                                    <i class="fas fa-arrow-right text-sm"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group flex flex-col h-full bg-gray-50 dark:bg-darkBg rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 transition-all duration-300 reveal delay-100">
+                    <div class="h-60 overflow-hidden relative">
+                        <img src="images/patio (9).jpg"
+                            alt="Commercial Projects"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-brand-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay">
+                        </div>
+                    </div>
+                    <div class="service-card-content flex flex-col flex-grow p-8 bg-gray-50 dark:bg-darkBg">
+                        <div
+                            class="w-12 h-12 rounded-full bg-white dark:bg-darkCard shadow-sm flex items-center justify-center text-brand-primary text-xl mb-6 -mt-14 z-20 border border-gray-100 dark:border-gray-700 relative">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 font-display">Commercial Projects</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-8 flex-grow">Elevate your business
+                            exterior. We provide durable, high-traffic furniture solutions tailored for restaurants,
+                            hotels, and corporate outdoor spaces.</p>
+                        <div class="mt-auto border-t border-gray-200 dark:border-gray-700 pt-5">
+                            <a href="services-details.html" class="flex items-center justify-between group/btn w-full">
+                                <span
+                                    class="font-bold text-gray-900 dark:text-white group-hover/btn:text-brand-primary transition-colors">Enquire
+                                    Now</span>
+                                <span
+                                    class="w-10 h-10 rounded-full bg-white dark:bg-darkCard border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 group-hover/btn:bg-brand-primary group-hover/btn:border-brand-primary group-hover/btn:text-white transition-all transform group-hover/btn:translate-x-1">
+                                    <i class="fas fa-arrow-right text-sm"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group flex flex-col h-full bg-gray-50 dark:bg-darkBg rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 dark:border-gray-800 transition-all duration-300 reveal delay-200">
+                    <div class="h-60 overflow-hidden relative">
+                        <img src="images/patio (10).jpg"
+                            alt="Eco Trade-In"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-brand-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay">
+                        </div>
+                    </div>
+                    <div class="service-card-content flex flex-col flex-grow p-8 bg-gray-50 dark:bg-darkBg">
+                        <div
+                            class="w-12 h-12 rounded-full bg-white dark:bg-darkCard shadow-sm flex items-center justify-center text-brand-primary text-xl mb-6 -mt-14 z-20 border border-gray-100 dark:border-gray-700 relative">
+                            <i class="fas fa-recycle"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 font-display">Eco Trade-In</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-8 flex-grow">Ready for an upgrade? Trade
+                            in your old patio furniture. We responsibly recycle or upcycle old materials, offering you
+                            credit toward your new setup.</p>
+                        <div class="mt-auto border-t border-gray-200 dark:border-gray-700 pt-5">
+                            <a href="services-details.html" class="flex items-center justify-between group/btn w-full">
+                                <span
+                                    class="font-bold text-gray-900 dark:text-white group-hover/btn:text-brand-primary transition-colors">Enquire
+                                    Now</span>
+                                <span
+                                    class="w-10 h-10 rounded-full bg-white dark:bg-darkCard border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 group-hover/btn:bg-brand-primary group-hover/btn:border-brand-primary group-hover/btn:text-white transition-all transform group-hover/btn:translate-x-1">
+                                    <i class="fas fa-arrow-right text-sm"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-gray-50 dark:bg-darkBg border-y border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-primary font-bold uppercase tracking-wider text-sm">Simple Steps</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-2 font-display">How Our Service Works</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <div
+                    class="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-0.5 bg-gray-200 dark:bg-gray-700 z-0">
+                </div>
+
+                <div class="text-center relative z-10 reveal">
+                    <div
+                        class="w-24 h-24 mx-auto bg-white dark:bg-darkCard rounded-full flex items-center justify-center border-4 border-gray-50 dark:border-darkBg shadow-lg mb-6">
+                        <span class="text-2xl font-display font-bold text-brand-primary">01</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Consultation</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Meet with our experts to discuss your space,
+                        aesthetic, and functional needs.</p>
+                </div>
+
+                <div class="text-center relative z-10 reveal delay-100">
+                    <div
+                        class="w-24 h-24 mx-auto bg-brand-primary text-white rounded-full flex items-center justify-center border-4 border-gray-50 dark:border-darkBg shadow-lg mb-6 transform scale-110">
+                        <span class="text-2xl font-display font-bold">02</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Design & Plan</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Review 3D layouts and material samples curated
+                        specifically for your patio.</p>
+                </div>
+
+                <div class="text-center relative z-10 reveal delay-200">
+                    <div
+                        class="w-24 h-24 mx-auto bg-white dark:bg-darkCard rounded-full flex items-center justify-center border-4 border-gray-50 dark:border-darkBg shadow-lg mb-6">
+                        <span class="text-2xl font-display font-bold text-brand-primary">03</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">White-Glove Delivery</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Sit back while we deliver, assemble, and
+                        perfectly place your new furniture.</p>
+                </div>
+
+                <div class="text-center relative z-10 reveal delay-300">
+                    <div
+                        class="w-24 h-24 mx-auto bg-white dark:bg-darkCard rounded-full flex items-center justify-center border-4 border-gray-50 dark:border-darkBg shadow-lg mb-6">
+                        <span class="text-2xl font-display font-bold text-brand-primary">04</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Enjoy Your Oasis</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Step outside and start creating lifelong
+                        memories in your upgraded space.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white dark:bg-darkCard">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <span class="text-brand-primary font-bold uppercase tracking-wider text-sm">The PatioOasis
+                        Difference</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mt-2 font-display mb-6">Expertise You Can Trust</h2>
+                    <p class="text-gray-600 dark:text-gray-400 text-lg mb-10">We don't just sell outdoor furniture; we
+                        curate lifestyles. Our comprehensive services ensure that every detail, from concept to
+                        installation, is executed flawlessly.</p>
+
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-5">
+                            <div
+                                class="w-12 h-12 shrink-0 rounded-xl bg-brand-primary/10 text-brand-primary flex items-center justify-center text-xl">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Lifetime Support Guarantee</h4>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Our relationship doesn't end at
+                                    delivery. We provide ongoing care advice and support for the life of your furniture.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5">
+                            <div
+                                class="w-12 h-12 shrink-0 rounded-xl bg-brand-primary/10 text-brand-primary flex items-center justify-center text-xl">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Award-Winning Designers</h4>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Work directly with
+                                    industry-recognized design professionals who understand exterior architecture and
+                                    flow.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5">
+                            <div
+                                class="w-12 h-12 shrink-0 rounded-xl bg-brand-primary/10 text-brand-primary flex items-center justify-center text-xl">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Nationwide Network</h4>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Whether you're furnishing a coastal
+                                    retreat or an urban balcony, our delivery and service network covers you coast to
+                                    coast.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative reveal delay-100">
+                    <img src="images/patio (11).jpg"
+                        alt="Beautiful patio setup"
+                        class="rounded-3xl shadow-2xl relative z-10 w-full object-cover h-[600px]">
+                    <div
+                        class="absolute -bottom-10 -left-10 w-64 h-64 bg-brand-primary/20 rounded-full blur-3xl z-0 pointer-events-none">
+                    </div>
+                    <div
+                        class="absolute -top-10 -right-10 w-64 h-64 bg-brand-primary/20 rounded-full blur-3xl z-0 pointer-events-none">
+                    </div>
+
+                    <div class="absolute top-10 -left-8 bg-white dark:bg-darkBg p-5 rounded-2xl shadow-xl z-20 border border-gray-100 dark:border-gray-800 flex items-center gap-4 animate-bounce"
+                        style="animation-duration: 3s;">
+                        <div class="text-brand-primary text-3xl"><i class="fas fa-smile-beam"></i></div>
+                        <div>
+                            <p class="font-bold text-xl">10k+</p>
+                            <p class="text-xs text-gray-500 uppercase">Happy Clients</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 relative overflow-hidden">
+        <img src="images/patio (12).jpg"
+            alt="Luxury Outdoor Setup" class="absolute inset-0 w-full h-full object-cover z-0">
+        <div class="absolute inset-0 bg-gray-900/80 backdrop-blur-sm z-0"></div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center reveal">
+            <span class="text-brand-light font-bold uppercase tracking-widest text-sm mb-4 block">Let's Get
+                Started</span>
+            <h2 class="text-4xl md:text-6xl font-bold text-white font-display mb-6">Ready to Transform Your Outdoor
+                Space?</h2>
+            <p class="text-gray-300 text-lg mb-10 max-w-2xl mx-auto">Book a free, no-obligation consultation with our
+                design team today and discover the endless possibilities for your patio, deck, or garden.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="contact.html"
+                    class="px-8 py-4 bg-brand-primary text-white rounded-full font-bold hover:bg-brand-light transition-colors text-lg shadow-xl shadow-brand-primary/40">Book
+                    Free Consultation</a>
+                <a href="tel:+15559876543"
+                    class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold hover:bg-white hover:text-gray-900 transition-colors text-lg flex items-center justify-center gap-2">
+                    <i class="fas fa-phone-alt"></i> (555) 987-6543
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#050505] text-gray-400 py-20 border-t border-gray-900">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+                <div class="lg:col-span-4">
+                    <a href="index.html"
+                        class="text-2xl font-bold tracking-tighter text-brand-primary flex items-center gap-2 mb-6 font-display">
+                        <i class="fas fa-leaf"></i> PatioOasis
+                    </a>
+                    <p class="text-sm leading-relaxed mb-8 max-w-sm">
+                        Transforming backyards into breathtaking living spaces. We bring comfort, endurance, and elegant
+                        design to your great outdoors.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all duration-300">
+                            <i class="fa-brands fa-pinterest-p"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 lg:col-start-6">
+                    <h4 class="text-white font-display font-medium text-lg mb-6 tracking-wide">Explore</h4>
+                    <ul class="space-y-4 text-sm font-medium">
+                        <li><a href="about.html" class="hover:text-brand-primary transition-colors">Our Story</a></li>
+                        <li><a href="menu.html" class="hover:text-brand-primary transition-colors">Collections</a></li>
+                        <li><a href="services.html" class="hover:text-brand-primary transition-colors">Design
+                                Services</a></li>
+                        <li><a href="gallery.html" class="hover:text-brand-primary transition-colors">Inspiration</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-2">
+                    <h4 class="text-white font-display font-medium text-lg mb-6 tracking-wide">Support</h4>
+                    <ul class="space-y-4 text-sm font-medium">
+                        <li><a href="contact.html" class="hover:text-brand-primary transition-colors">Contact Us</a>
+                        </li>
+                        <li><a href="faq.html" class="hover:text-brand-primary transition-colors">FAQ & Shipping</a>
+                        </li>
+                        <li><a href="#" class="hover:text-brand-primary transition-colors">Warranty Info</a></li>
+                        <li><a href="#" class="hover:text-brand-primary transition-colors">Care Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h4 class="text-white font-display font-medium text-lg mb-6 tracking-wide">Newsletter</h4>
+                    <p class="text-sm mb-4">Subscribe for seasonal patio trends and exclusive early access to sales.</p>
+                    <form class="flex flex-col gap-3">
+                        <input type="email" placeholder="Enter your email"
+                            class="w-full bg-gray-900 border border-gray-800 text-white px-4 py-3 rounded-lg focus:outline-none focus:border-brand-primary transition-colors text-sm"
+                            required>
+                        <button type="button"
+                            class="w-full bg-brand-primary text-white font-semibold py-3 rounded-lg hover:bg-brand-dark transition-colors text-sm">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-gray-900 text-xs">
+                <p>© 2026 PatioOasis. All rights reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <p class="flex items-center gap-2"><i class="fas fa-envelope text-brand-primary"></i>
+                        support@patiooasis.com</p>
+                    <p class="flex items-center gap-2"><i class="fas fa-phone-alt text-brand-primary"></i> +1 (555)
+                        987-6543</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme & RTL Toggles
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+        function toggleTheme() { document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
+        themeToggle.addEventListener('click', toggleTheme); mobileThemeToggle.addEventListener('click', toggleTheme);
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+
+        const rtlToggle = document.getElementById('rtlToggle');
+        const mobileRtlToggle = document.getElementById('mobileRtlToggle');
+        const mobileNav = document.getElementById('mobileNavMenu');
+        function toggleRTL() { document.documentElement.dir = document.documentElement.dir === 'rtl' ? 'ltr' : 'rtl'; localStorage.setItem('dir', document.documentElement.dir); }
+        rtlToggle.addEventListener('click', toggleRTL); mobileRtlToggle.addEventListener('click', toggleRTL);
+        if (localStorage.getItem('dir') === 'rtl') document.documentElement.dir = 'rtl';
+
+        // Hamburger Menu Logic
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const closeBtn = document.getElementById('closeMenuBtn');
+        mobileBtn.addEventListener('click', () => { const isRTL = document.documentElement.dir === 'rtl'; mobileNav.style.right = isRTL ? 'auto' : '0'; mobileNav.style.left = isRTL ? '0' : 'auto'; });
+        closeBtn.addEventListener('click', () => { const isRTL = document.documentElement.dir === 'rtl'; mobileNav.style.right = isRTL ? 'auto' : '-100%'; mobileNav.style.left = isRTL ? '-100%' : 'auto'; });
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+    <script>
+        // Active Link Highlighting (Safe fallback if backend matching fails)
+        document.addEventListener("DOMContentLoaded", () => {
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+            document.querySelectorAll('a').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && currentPath === href) {
+                    if ((link.closest('.lg\\:flex') || link.closest('.desktop-menu') || link.closest('ul') || link.closest('.mobile-nav-drawer')) && !link.closest('.logo')) {
+                        link.classList.add('text-brand-primary', 'font-bold');
+                        link.style.color = 'var(--brand-primary)';
+                        link.style.fontWeight = 'bold';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
