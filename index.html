@@ -75,7 +75,7 @@
                 <!-- Logo -->
                 <a href="index.html"
                     class="text-2xl font-bold tracking-tighter text-brand-primary flex items-center gap-2 z-10 font-display">
-                    <i class="fas fa-leaf"></i> PatioOasis
+                    <i class="fas fa-couch"></i> PatioOasis
                 </a>
 
                 <!-- Desktop Menu -->
@@ -137,7 +137,7 @@
         class="mobile-nav-menu fixed top-0 -right-[100%] w-[85%] max-w-sm h-full bg-slate-900 z-[1001] p-6 flex flex-col overflow-y-auto">
         <div class="flex items-center justify-between mb-8">
             <a href="index.html" class="text-2xl font-bold tracking-tighter text-brand-primary flex items-center gap-2 font-display">
-                <i class="fas fa-leaf"></i> PatioOasis
+                <i class="fas fa-couch"></i> PatioOasis
             </a>
             <button class="close-btn text-white text-3xl" id="closeMenuBtn">✕</button>
         </div>
@@ -176,30 +176,54 @@
     ========================= -->
     <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-gray-50 dark:bg-darkBg/50 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <span class="text-brand-primary font-semibold tracking-widest uppercase text-sm">Elevate Your
-                    Exterior</span>
-                <h1 class="text-5xl lg:text-7xl font-semibold mt-4 mb-6 leading-tight">Crafting Your Perfect <span
-                        class="text-brand-primary">Outdoor Sanctuary</span></h1>
-                <p class="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-lg">From cozy balcony sets to expansive
-                    patio lounges, discover premium weather-resistant furniture designed for style and durability.</p>
-                <div class="flex gap-4">
-                    <a href="menu.html"
-                        class="px-8 py-4 bg-brand-primary text-white rounded-full font-semibold hover:opacity-90 transition">Shop
-                        Collection</a>
-                    <a href="contact.html"
-                        class="px-8 py-4 border-2 border-brand-primary text-brand-primary rounded-full font-semibold hover:bg-brand-primary hover:text-white transition">Design
-                        Consult</a>
+            <div class="reveal z-10">
+                <span class="text-brand-primary font-semibold tracking-widest uppercase text-sm">Elevate Your Exterior</span>
+                <h1 class="text-5xl lg:text-7xl font-semibold mt-4 mb-6 leading-tight">Crafting Your Perfect <span class="text-brand-primary">Outdoor Sanctuary</span></h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mb-6 max-w-lg">Transform your backyard into a lifelong retreat. Discover our premium collections of seating, dining, and outdoor accessories engineered for style, comfort, and uncompromising durability.</p>
+                
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <span class="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 shadow-sm"><i class="fas fa-couch text-brand-primary"></i> Deep Seating</span>
+                    <span class="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 shadow-sm"><i class="fas fa-utensils text-brand-primary"></i> Dining Sets</span>
+                    <span class="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 shadow-sm"><i class="fas fa-fire text-brand-primary"></i> Fire Pits</span>
+                    <span class="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 shadow-sm"><i class="fas fa-umbrella-beach text-brand-primary"></i> Shade Solutions</span>
+                </div>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="menu.html" class="px-8 py-4 bg-brand-primary text-white rounded-full font-semibold hover:bg-brand-primary/90 shadow-lg shadow-brand-primary/30 transition-all">Shop Collection</a>
+                    <a href="contact.html" class="px-8 py-4 border-2 border-brand-primary text-brand-primary rounded-full font-semibold hover:bg-brand-primary hover:text-white transition-all">Design Consult</a>
                 </div>
             </div>
+            
             <div class="relative reveal">
-                <img src="images/patio (1).jpg"
-                    class="rounded-3xl shadow-2xl w-full h-[500px] object-cover" alt="Luxury outdoor patio furniture">
-                <div
-                    class="absolute -bottom-8 -left-8 bg-white dark:bg-darkCard p-6 rounded-2xl shadow-xl hidden md:block border border-gray-100 dark:border-gray-700">
-                    <p class="text-brand-primary font-bold text-3xl">10 Yrs</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">Weather Warranty</p>
+                <!-- Bento box grid for images -->
+                <div class="grid grid-cols-2 gap-4 h-[550px]">
+                    <div class="col-span-1 row-span-2 relative rounded-3xl overflow-hidden shadow-2xl group">
+                        <img src="images/patio (11).jpg" onerror="this.src='https://images.unsplash.com/photo-1595526051245-4506e0005bd0?auto=format&fit=crop&q=80'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Lounge Seating">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <span class="bg-white/90 dark:bg-darkBg/90 backdrop-blur text-gray-900 dark:text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Lounge</span>
+                            <p class="text-white font-bold mt-2">Modular Sofas</p>
+                        </div>
+                    </div>
+                    <div class="col-span-1 row-span-1 relative rounded-3xl overflow-hidden shadow-xl group">
+                        <img src="images/patio (14).jpg" onerror="this.src='https://images.unsplash.com/photo-1576695447475-697b0a7082bf?auto=format&fit=crop&q=80'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Dining Set">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-white/90 dark:bg-darkBg/90 backdrop-blur text-gray-900 dark:text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Dining</span>
+                            <p class="text-white font-bold text-sm mt-1">Teak Tables</p>
+                        </div>
+                    </div>
+                    <div class="col-span-1 row-span-1 relative rounded-3xl overflow-hidden shadow-xl group">
+                        <img src="images/patio (5).jpg" onerror="this.src='https://images.unsplash.com/photo-1615800098779-1be32e60cca3?auto=format&fit=crop&q=80'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Accessories">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-white/90 dark:bg-darkBg/90 backdrop-blur text-gray-900 dark:text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Decor</span>
+                            <p class="text-white font-bold text-sm mt-1">Egg Chairs & Accents</p>
+                        </div>
+                    </div>
                 </div>
+                
+              
             </div>
         </div>
     </section>
@@ -351,15 +375,16 @@
                 <h2 class="text-4xl md:text-5xl font-bold mt-2">Loved by Homeowners</h2>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 reveal">
-                    <div class="flex text-yellow-400 mb-4 text-sm gap-1">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                <!-- Sarah -->
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 reveal h-full flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-yellow-400 mb-4 text-sm gap-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-white/90 mb-6 italic leading-relaxed text-justify">"The Milano set completely transformed our deck. It survived a brutal winter and still looks brand new. Incredibly comfortable!"</p>
                     </div>
-                    <p class="text-white/90 mb-6 italic leading-relaxed">"The Milano set completely transformed our
-                        deck. It survived a brutal winter and still looks brand new. Incredibly comfortable!"</p>
-                    <div class="flex items-center gap-4">
-                        <img src="images/patio (6).jpg" alt="Sarah"
+                    <div class="flex items-center gap-4 mt-auto">
+                        <img src="images/sarah.jpg" alt="Sarah" onerror="this.src='images/patio (6).jpg'"
                             class="w-12 h-12 rounded-full object-cover border-2 border-white/30">
                         <div>
                             <h4 class="font-bold text-sm">Sarah Jenkins</h4>
@@ -367,16 +392,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 reveal"
+                <!-- Marcus -->
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 reveal h-full flex flex-col justify-between"
                     style="transition-delay: 100ms;">
-                    <div class="flex text-yellow-400 mb-4 text-sm gap-1">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <div>
+                        <div class="flex text-yellow-400 mb-4 text-sm gap-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-white/90 mb-6 italic leading-relaxed text-justify">"Top tier customer service. The white-glove delivery was flawless, and the dining set is now the centerpiece of our backyard."</p>
                     </div>
-                    <p class="text-white/90 mb-6 italic leading-relaxed">"Top tier customer service. The white-glove
-                        delivery was flawless, and the dining set is now the centerpiece of our backyard."</p>
-                    <div class="flex items-center gap-4">
-                        <img src="images/patio (7).jpg" alt="Marcus"
+                    <div class="flex items-center gap-4 mt-auto">
+                        <img src="images/marcus.jpg" alt="Marcus" onerror="this.src='images/patio (7).jpg'"
                             class="w-12 h-12 rounded-full object-cover border-2 border-white/30">
                         <div>
                             <h4 class="font-bold text-sm">Marcus Ray</h4>
@@ -384,16 +410,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 reveal"
+                <!-- Emily -->
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 reveal h-full flex flex-col justify-between"
                     style="transition-delay: 200ms;">
-                    <div class="flex text-yellow-400 mb-4 text-sm gap-1">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <div>
+                        <div class="flex text-yellow-400 mb-4 text-sm gap-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-white/90 mb-6 italic leading-relaxed text-justify">"I was hesitant to buy furniture online, but the quality exceeded expectations. The teak wood is absolutely gorgeous."</p>
                     </div>
-                    <p class="text-white/90 mb-6 italic leading-relaxed">"I was hesitant to buy furniture online, but
-                        the quality exceeded expectations. The teak wood is absolutely gorgeous."</p>
-                    <div class="flex items-center gap-4">
-                        <img src="images/patio (8).jpg" alt="Emily"
+                    <div class="flex items-center gap-4 mt-auto">
+                        <img src="images/emily.jpg" alt="Emily" onerror="this.src='images/patio (8).jpg'"
                             class="w-12 h-12 rounded-full object-cover border-2 border-white/30">
                         <div>
                             <h4 class="font-bold text-sm">Emily Chen</h4>
@@ -531,7 +558,7 @@
                 <div class="lg:col-span-4">
                     <a href="index.html"
                         class="text-2xl font-bold tracking-tighter text-brand-primary flex items-center gap-2 mb-6 font-display">
-                        <i class="fas fa-leaf"></i> PatioOasis
+                        <i class="fas fa-couch"></i> PatioOasis
                     </a>
                     <p class="text-sm leading-relaxed mb-8 max-w-sm">
                         Transforming backyards into breathtaking living spaces. We bring comfort, endurance, and elegant
